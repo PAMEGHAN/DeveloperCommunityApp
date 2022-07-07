@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.entity.Developer;
+import com.cg.entity.User;
 import com.cg.exception.DeveloperNotFoundException;
 import com.cg.repository.DeveloperRepository;
 
@@ -18,8 +19,9 @@ public class DeveloperService{
 	@Autowired
 	public DeveloperRepository drepository;
 	
+	
 	public String addDeveloper(Developer dev) {
-		drepository.save(dev);
+		drepository.saveAndFlush(dev);
 		return "Developer is Added";
 	}
     public List<Developer> getAllDeveloper() {

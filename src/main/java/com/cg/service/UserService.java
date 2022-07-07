@@ -15,20 +15,23 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public String validateUser(String userId ,String password,String role){
-	  if( userRepository.findByUserIdAndPasswordAndRole(userId, password,role) != null) {
+	@Autowired
+	private DeveloperService ds;
+	
+	public String validateUser(int userId ,String password){
+	  if( userRepository.findByUserIdAndPassword(userId, password) != null) {
 		  return "Valid user";
 	  }
       return "Invalid user,Please Register";
 	}
 	
-	public List<User>addUser(User user) 
+	public List<User> addUser(User user) 
 	  {
 		userRepository.save(user);
 		return userRepository.findAll();
 		}
 	
-	public List<User>removeUser(String id)
+	public List<User> removeUser(int id)
 	{
 		userRepository.deleteById(id);
 		return userRepository.findAll();
@@ -40,5 +43,13 @@ public class UserService {
 	   }
 	   return "Still Signed in";
 	}
+
+	
+
+	
+
+	
+
+	
 
 }

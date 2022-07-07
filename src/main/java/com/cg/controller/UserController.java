@@ -26,14 +26,14 @@ public class UserController {
 		return userService.addUser(user);
 	}
 	
-	@GetMapping("/validateUser/{UserId}/{password}/{role}")
-	public String validateUser(@PathVariable("UserId") String id,@PathVariable("password") String password,@PathVariable("role") String role)
+	@GetMapping("/validateUser/{UserId}/{password}")
+	public String validateUser(@PathVariable("UserId") int userId,@PathVariable("password") String password)
 	{
-		return userService.validateUser(id, password,role);
+		return userService.validateUser(userId, password);
 	}
 	
 	@DeleteMapping("/removeUser/{id}")
-	public List<User> deleteUser(@PathVariable("id") String id){
+	public List<User> removeUser(@PathVariable("id") int id){
 		 return userService.removeUser(id);
 	}
     @GetMapping("/SignOut/{message}")

@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name="developers")
+@Table(name="developer")
 public class Developer {
 
 	@Id
@@ -40,10 +40,17 @@ public class Developer {
 	private boolean isVerified;
 	@Column (name="blocked")
 	private boolean isBlocked;
-	public Developer(Integer devId, String developerName, String email, String skillLevel, LocalDate memberSince,
-			Integer totalFeeds, Integer reputation, boolean isVerified, boolean isBlocked) {
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	//@JoinColumn(name="devId")
+	private User users;
+	
+	public Developer() {}
+
+	public Developer(String developerName, String email, String skillLevel, LocalDate memberSince,
+			Integer totalFeeds, Integer reputation, boolean isVerified, boolean isBlocked, User users) {
 		super();
-		this.devId = devId;
+	//	this.devId = devId;
 		this.developerName = developerName;
 		this.email = email;
 		this.skillLevel = skillLevel;
@@ -52,68 +59,93 @@ public class Developer {
 		this.reputation = reputation;
 		this.isVerified = isVerified;
 		this.isBlocked = isBlocked;
+		this.users = users;
 	}
+
 	public Integer getDevId() {
 		return devId;
 	}
-	public void setDevId(Integer devId) {
+
+	/*public void setDevId(Integer devId) {
 		this.devId = devId;
-	}
+	}*/
+
 	public String getDeveloperName() {
 		return developerName;
 	}
+
 	public void setDeveloperName(String developerName) {
 		this.developerName = developerName;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getSkillLevel() {
 		return skillLevel;
 	}
+
 	public void setSkillLevel(String skillLevel) {
 		this.skillLevel = skillLevel;
 	}
+
 	public LocalDate getMemberSince() {
 		return memberSince;
 	}
+
 	public void setMemberSince(LocalDate memberSince) {
 		this.memberSince = memberSince;
 	}
+
 	public Integer getTotalFeeds() {
 		return totalFeeds;
 	}
+
 	public void setTotalFeeds(Integer totalFeeds) {
 		this.totalFeeds = totalFeeds;
 	}
+
 	public Integer getReputation() {
 		return reputation;
 	}
+
 	public void setReputation(Integer reputation) {
 		this.reputation = reputation;
 	}
+
 	public boolean isVerified() {
 		return isVerified;
 	}
+
 	public void setVerified(boolean isVerified) {
 		this.isVerified = isVerified;
 	}
+
 	public boolean isBlocked() {
 		return isBlocked;
 	}
+
 	public void setBlocked(boolean isBlocked) {
 		this.isBlocked = isBlocked;
 	}
+
+	public User getUsers() {
+		return users;
+	}
+
+	public void setUsers(User users) {
+		this.users = users;
+	}
+
 	@Override
 	public String toString() {
 		return "Developer [devId=" + devId + ", developerName=" + developerName + ", email=" + email + ", skillLevel="
 				+ skillLevel + ", memberSince=" + memberSince + ", totalFeeds=" + totalFeeds + ", reputation="
-				+ reputation + ", isVerified=" + isVerified + ", isBlocked=" + isBlocked + "]";
+				+ reputation + ", isVerified=" + isVerified + ", isBlocked=" + isBlocked + ", users=" + users + "]";
 	}
-	
-
-}
-	
+}	

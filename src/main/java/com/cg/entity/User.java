@@ -1,13 +1,11 @@
 package com.cg.entity;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +13,8 @@ import javax.persistence.Table;
 public class User {
 	
 	 @Id
-	 @GeneratedValue(strategy=GenerationType.IDENTITY)
-	 private String userId;
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+	 private int userId;
 	 @Column(name="userpassword")
 	 private String password;
 	 @Column(name="userrole")
@@ -25,22 +23,22 @@ public class User {
 	 public User() {}
 
 
-	public User(String userId, String password, String role) {
+	public User(String password, String role) {
 		super();
-		this.userId = userId;
+		//this.userId = userId;
 		this.password = password;
 		this.role = role;
 	}
 
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 
-	public void setUserId(String userId) {
+	/*public void setUserId(int userId) {
 		this.userId = userId;
-	}
+	}*/
 
 
 	public String getPassword() {
