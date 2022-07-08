@@ -1,4 +1,4 @@
-package com.cg.service;
+package com.cg.serviceimpl;
 
 import java.util.List;
 
@@ -7,16 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.cg.entity.User;
 import com.cg.repository.UserRepository;
+import com.cg.service.IUserService;
 
 
 @Service
-public class UserService {
+public class UserService implements IUserService{
 	
 	@Autowired
-	private UserRepository userRepository;
+	public UserRepository userRepository;
 	
 	@Autowired
-	private DeveloperService ds;
+	public DeveloperService ds;
 	
 	public String validateUser(int userId ,String password){
 	  if( userRepository.findByUserIdAndPassword(userId, password) != null) {

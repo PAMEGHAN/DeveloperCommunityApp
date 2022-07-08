@@ -1,6 +1,7 @@
-package com.cg.service;
+package com.cg.serviceimpl;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -11,17 +12,23 @@ import com.cg.entity.Developer;
 import com.cg.entity.User;
 import com.cg.exception.DeveloperNotFoundException;
 import com.cg.repository.DeveloperRepository;
+import com.cg.service.IDeveloperService;
 
 @Service
-public class DeveloperService{
+public class DeveloperService implements IDeveloperService{
 	
 	List<Developer> dlist=new ArrayList();
+	
 	@Autowired
 	public DeveloperRepository drepository;
 	
+	//@Autowired
+	//private ResponseService rs;
 	
+
 	public String addDeveloper(Developer dev) {
 		drepository.saveAndFlush(dev);
+		//System.out.println("developer added");
 		return "Developer is Added";
 	}
     public List<Developer> getAllDeveloper() {

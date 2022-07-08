@@ -11,22 +11,7 @@ import com.cg.entity.Developer;
 @Repository
 public interface DeveloperRepository extends JpaRepository<Developer,Integer>{
 
-	//Developer setUpdateStatus(String string, int devId);
-
-	//Developer getDeveloper(int devId);
 	
-	
-	/*Developer saveDeveloper(Developer dev);
-
-	Developer updateDeveloper(Developer dev);
-	
-	Developer statusDeveloper(Developer dev);
-	
-	Developer fetchDeveloper(int devId);
-	
-	List<Developer> fetchAllDeveloper();
-	
-*/
 
 }
 

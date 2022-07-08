@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.entity.User;
-import com.cg.service.UserService;
+import com.cg.service.IUserService;
+import com.cg.serviceimpl.UserService;
 
 @RestController
 public class UserController {
 
 	@Autowired
-	public UserService userService;
+	private IUserService userService;
 	
 	@PostMapping("/RegisterUser")
 	public List<User> addUser(@Valid @RequestBody User user) {

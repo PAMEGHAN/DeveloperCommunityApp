@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -19,11 +20,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="developer")
-public class Developer {
+public class Developer{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer devId;
+	private int devId;
 	@Column (name=" dname")
 	private String developerName;
 	@Column (name="email")
@@ -42,15 +43,18 @@ public class Developer {
 	private boolean isBlocked;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	//@JoinColumn(name="devId")
 	private User users;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="developer")
+	private List<Feed> feeds;
 	
 	public Developer() {}
 
-	public Developer(String developerName, String email, String skillLevel, LocalDate memberSince,
-			Integer totalFeeds, Integer reputation, boolean isVerified, boolean isBlocked, User users) {
+	public Developer(int devId, String developerName, String email, String skillLevel, LocalDate memberSince,
+			Integer totalFeeds, Integer reputation, boolean isVerified, boolean isBlocked, User users,
+			List<Feed> feeds) {
 		super();
-	//	this.devId = devId;
+		this.devId = devId;
 		this.developerName = developerName;
 		this.email = email;
 		this.skillLevel = skillLevel;
@@ -60,15 +64,16 @@ public class Developer {
 		this.isVerified = isVerified;
 		this.isBlocked = isBlocked;
 		this.users = users;
+		this.feeds = feeds;
 	}
 
-	public Integer getDevId() {
+	public int getDevId() {
 		return devId;
 	}
 
-	/*public void setDevId(Integer devId) {
+	public void setDevId(int devId) {
 		this.devId = devId;
-	}*/
+	}
 
 	public String getDeveloperName() {
 		return developerName;
@@ -142,10 +147,23 @@ public class Developer {
 		this.users = users;
 	}
 
+	public List<Feed> getFeeds() {
+		return feeds;
+	}
+
+	public void setFeeds(List<Feed> feeds) {
+		this.feeds = feeds;
+	}
+
 	@Override
 	public String toString() {
 		return "Developer [devId=" + devId + ", developerName=" + developerName + ", email=" + email + ", skillLevel="
 				+ skillLevel + ", memberSince=" + memberSince + ", totalFeeds=" + totalFeeds + ", reputation="
-				+ reputation + ", isVerified=" + isVerified + ", isBlocked=" + isBlocked + ", users=" + users + "]";
+				+ reputation + ", isVerified=" + isVerified + ", isBlocked=" + isBlocked + ", users=" + users
+				+ ", feeds=" + feeds + "]";
 	}
+
+	
+	
+	
 }	

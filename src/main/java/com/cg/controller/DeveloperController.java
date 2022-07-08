@@ -4,6 +4,7 @@ package com.cg.controller;
 
 import java.util.List;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.entity.Developer;
-import com.cg.service.DeveloperService;
+import com.cg.service.IDeveloperService;
+import com.cg.serviceimpl.DeveloperService;
 
 
 
@@ -24,10 +26,11 @@ import com.cg.service.DeveloperService;
 public class DeveloperController {
 	
 	@Autowired
-	private DeveloperService dservice;
+	private IDeveloperService dservice;
 	
 	@PostMapping("/addDeveloper")
 	public String addDeveloper(@Valid @RequestBody Developer dev) {
+		//System.out.println("request recieved");
 		return dservice.addDeveloper(dev);
 		
 	}
